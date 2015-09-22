@@ -28,7 +28,16 @@ def convert_markdown(markdown_source, config, site_navigation=None):
     extensions = [
         RelativePathExtension(site_navigation, config['strict'])
     ] + config['markdown_extensions']
-
+    
+    # Some markdown extensions(for example https://github.com/vi4m/python-markdown-graphviz - dot images generator)
+    # need to know site_dir variable, to be able to generate images there.
+    # The solution for this is to provide special $mkdocs_site_dir variable used in the config file as usual
+    # but replaced at runtime with the real value.
+    
+    for mdx_name, mdx_config in config['mdx_configs'].iteritems():
+        if mdx_config['configs'].has_key('mkdocs_site_dir'):
+            mdx_config['configs']['mkdocs_site_dir'] = config['site_dir']
+            
     return utils.convert_markdown(
         markdown_source=markdown_source,
         extensions=extensions,
