@@ -34,7 +34,7 @@ def convert_markdown(markdown_source, config, site_navigation=None):
     # The solution for this is to provide special $mkdocs_site_dir variable used in the config file as usual
     # but replaced at runtime with the real value.
     
-    for mdx_name, mdx_config in config['mdx_configs'].iteritems():
+    for mdx_name, mdx_config in config['mdx_configs'].items():
         if mdx_config['configs'].has_key('mkdocs_site_dir'):
             mdx_config['configs']['mkdocs_site_dir'] = config['site_dir']
             
