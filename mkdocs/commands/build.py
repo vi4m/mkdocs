@@ -35,7 +35,7 @@ def convert_markdown(markdown_source, config, site_navigation=None):
     # but replaced at runtime with the real value.
     
     for mdx_name, mdx_config in config['mdx_configs'].items():
-        if 'mkdocs_site_dir' in mdx_config['configs']:
+        if 'configs' in mdx_config and 'mkdocs_site_dir' in mdx_config['configs']:
             mdx_config['configs']['mkdocs_site_dir'] = config['site_dir']
             
     return utils.convert_markdown(
